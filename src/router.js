@@ -7,9 +7,10 @@ const baseModule = weex.requireModule('WXBaseModule')
 
 export default class Router {
 
-    constructor ({routes, options}) {
+    constructor ({routes, serveModel, bundleDir}) {
         this.routes = routes
-        this.options = options
+        this.serveModel = serveModel
+        this.bundleDir = bundleDir
     }
 
     /**
@@ -44,7 +45,7 @@ export default class Router {
             throw new Error(`routes路由表中不存在该路径${route.path}`)
         }
         let bundleUrl = weex.config.bundleUrl
-        let bundleBasePath = bundleUrl.substr(0, bundleUrl.indexOf(this.options['BASE_BUNDLE_DIR'])) + this.options['BASE_BUNDLE_DIR']
+        let bundleBasePath = bundleUrl.substr(0, bundleUrl.indexOf(this.bundleDir)) + this.bundleDir
         item.component = bundleBasePath + item.component
         return item
     }
@@ -57,9 +58,9 @@ export default class Router {
      */
     getRoutePath (weexRoute, params = '') {
         let filePath = ''
-        if (this.options['SERVE_MODEL'] === 'SERVER') {
+        if (this.serveModel === 'SERVER') {
             filePath = weexRoute.component + params
-        } else if (this.options['SERVE_MODEL'] === 'APP_FILE') {
+        } else if (this.serveModel === 'APP_FILE') {
             const fileName = weexRoute.component.substring(weexRoute.component.lastIndexOf('/') + 1)
             filePath = fileName + params
         }
@@ -69,7 +70,7 @@ export default class Router {
     install (Vue) {
         const self = this
         let url = weex.config.bundleUrl, params = {}
-        if (this.options['SERVE_MODEL'] === 'APP_FILE') {
+        if (this.serveModel === 'APP_FILE') {
             url = this.setParams(weex.config.query, false)
         }
         params = this.getParams(url)
