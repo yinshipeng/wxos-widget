@@ -1,0 +1,28 @@
+{
+  "name": "wxos-widget",
+  "version": "1.0.0",
+  "description": "wxos widget",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:yinshipeng/wxos-widget.git"
+  },
+  "keywords": [
+    "weex"
+  ],
+  "babel": {
+    "presets": ["env"]
+  },
+  "author": "yinshipeng@houbank.cn",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.5"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1"
+  }
+}
