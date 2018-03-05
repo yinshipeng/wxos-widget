@@ -1,7 +1,11 @@
 /**
  * Created by yinshipeng on 2018/2/28
  */
-import { isNaN, isNumber, isBoolean, isEmpty, isObject as isObj } from 'lodash'
+import isNaN from 'lodash/isNaN'
+import isNumber from 'lodash/isNumber'
+import isBoolean from 'lodash/isBoolean'
+import isEmpty from 'lodash/isEmpty'
+import isObj from 'lodash/isObject'
 
 /**
  * 非空判断
@@ -67,4 +71,12 @@ export function getBase64 (base64Str) {
         base64Str = 'data:image/jpeg;base64,' + base64Str
     }
     return base64Str
+}
+
+export default {
+    isNotEmpty,
+    objParamsToString,
+    isObject,
+    startsWith,
+    getBase64
 }

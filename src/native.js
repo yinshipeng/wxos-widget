@@ -5,6 +5,7 @@ import { getBase64 } from './tools'
 
 const baseModule = weex.requireModule('WXBaseModule')
 const wxYituModule = weex.requireModule('WXYITUModule')
+const loadModule = weex.requireModule('WXLoadingModule')
 const Native = Object.create(null)
 
 Native.install = (Vue) => {
