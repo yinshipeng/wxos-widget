@@ -1,6 +1,6 @@
 {
   "name": "wxos-widget",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "wxos widget",
   "main": "index.js",
   "scripts": {

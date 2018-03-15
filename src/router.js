@@ -4,6 +4,7 @@
 import { isNotEmpty, objParamsToString } from './tools'
 
 const baseModule = weex.requireModule('WXBaseModule')
+const navigator = weex.requireModule('navigator')
 
 export default class Router {
 
@@ -46,8 +47,8 @@ export default class Router {
         }
         let bundleUrl = weex.config.bundleUrl
         let bundleBasePath = bundleUrl.substr(0, bundleUrl.indexOf(this.bundleDir)) + this.bundleDir
-        item.component = bundleBasePath + item.component
-        return item
+        const component = bundleBasePath + item.component
+        return { path: item.path, component }
     }
 
     /**
