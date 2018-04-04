@@ -5,7 +5,7 @@ import isNaN from 'lodash/isNaN'
 import isNumber from 'lodash/isNumber'
 import isBoolean from 'lodash/isBoolean'
 import isEmpty from 'lodash/isEmpty'
-import isObj from 'lodash/isObject'
+import isFunction from 'lodash/isFunction'
 
 /**
  * 非空判断
@@ -46,7 +46,8 @@ export function objParamsToString (obj, encode = true) {
  * @returns {boolean}
  */
 export function isObject (arg) {
-    return isObj(arg)
+    var type = typeof arg
+    return arg != null && (type == 'object' || type == 'function')
 }
 
 /**
@@ -73,10 +74,18 @@ export function getBase64 (base64Str) {
     return base64Str
 }
 
+/**
+ * 是否为函数
+ */
+export function isFunc (value) {
+    return isFunction(value)
+}
+
 export default {
     isNotEmpty,
     objParamsToString,
     isObject,
     startsWith,
-    getBase64
+    getBase64,
+    isFunc
 }

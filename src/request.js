@@ -1,7 +1,7 @@
 /**
  * Created by yinshipeng on 2018/3/2
  */
-import { isNotEmpty, objParamsToString } from './tools'
+import { isNotEmpty, objParamsToString, isFunc } from './tools'
 
 const stream = weex.requireModule('stream')
 const baseModule = weex.requireModule('WXBaseModule')
@@ -23,14 +23,14 @@ export default class Request {
      */
     getCurrentAPI (apiName) {
         let api = this.apis.find(item => {
-            if (item.hasOwnProperty(apiName)) {
+            if (item.hasOwnProperty('name') && item.name === apiName) {
                 return item
             }
         })
         if (!isNotEmpty(api)) {
             throw new Error(`没有找到${apiName}服务`)
         }
-        return api[apiName]
+        return api
     }
 
     install (Vue) {
@@ -39,9 +39,9 @@ export default class Request {
             const api = self.getCurrentAPI(apiName)
             let url = self.baseUrl + api.url, body = ''
             if (isNotEmpty(params)) {
-                if (api.method === 'GET') {
+                if (api.method.toLowerCase() === 'get') {
                     url += objParamsToString(params)
-                } else if (api.method === 'POST') {
+                } else if (api.method.toLowerCase() === 'post') {
                     body = JSON.stringify(params)
                 } else {
                     throw new Error(`未提供${api.method}请求方式`)
@@ -60,11 +60,12 @@ export default class Request {
                 let requestObj = Object.assign(options, opts)
                 return Promise.resolve(requestObj)
             }).then((requestObj) => {
-                baseModule.log(JSON.stringify(requestObj))
                 stream.fetch(requestObj, result => {
                     self.responseHandler(result, resolve, reject)
                 }, progress => {
-                    progressCallback(progress)
+                    if(isFunc(progressCallback)){
+                        progressCallback(progress)
+                    }
                 })
             })
 

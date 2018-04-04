@@ -70,18 +70,18 @@ export default class Router {
 
     install (Vue) {
         const self = this
-        let url = weex.config.bundleUrl, params = {}
+        let url = weex.config.bundleUrl, query = {}
         if (this.serveModel === 'APP_FILE') {
             url = this.setParams(weex.config.query, false)
         }
-        params = this.getParams(url)
-        Vue.prototype.$route = {params}
+        query = this.getParams(url)
+        Vue.prototype.$route = {query}
         Vue.prototype.$router = {
             push (route, destroyed = false) {
                 const currentRoute = self.getWeexRoute(route)
                 let routeParams
-                if (route.params) {
-                    routeParams = objParamsToString(route.params)
+                if (route.query) {
+                    routeParams = objParamsToString(route.query)
                 }
                 const filePath = self.getRoutePath(currentRoute, routeParams)
                 if (destroyed) {
