@@ -15,6 +15,24 @@ export default class Router {
     }
 
     /**
+     * object 转 URL 参数
+     * {id:1, name:123} => '?id=1&name=123'
+     * @param obj
+     * @returns {string}
+     */
+    setParams (obj,encode=true) {
+        if(!isNotEmpty(obj)) return ''
+        let url = '?'
+        for (let key in obj) {
+            if (obj[key] !== null) {
+                let val = encode ? encodeURIComponent(obj[key]) : obj[key]
+                url += (key + '=' + val + '&')
+            }
+        }
+        return url.substring(0, url.lastIndexOf('&'))
+    }
+
+    /**
      * URL参数转成对象
      * '{str}?name=aa' => {name: 'aa'}
      * @param obj
