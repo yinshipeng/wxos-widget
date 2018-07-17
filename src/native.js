@@ -107,6 +107,19 @@ Native.install = (Vue) => {
         },
 
         /**
+         * 调用native分享到微信朋友圈(自定义UI)
+         * @param  {String} shareLink    分享链接
+         * @param  {String} title        标题
+         * @param  {String} content      内容
+         * @param  {String} base64Bitmap base64图片
+         * @param  {String} shareType '0' 分享到微信， '1' 分享到朋友圈
+         * @return null
+         */
+        requestShareByWeex (shareLink, title, content, base64Bitmap, shareType) {
+            baseModule.requestShareByWeex(shareLink, title, content, base64Bitmap, shareType)
+        },
+
+        /**
          * 根据内容生成二维码
          * @param  {String} content 内容
          */
