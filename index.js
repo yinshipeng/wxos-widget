@@ -3,7 +3,7 @@
  */
 import Router from './src/router'
 import Request from './src/request'
-import './src/broadcast'
+import Broadcast from './src/broadcast'
 import './src/tools'
 import './src/native'
 import './src/storage'
