@@ -1,17 +1,16 @@
 /**
  * Created by yinshipeng on 2018/3/5
  */
-
 export default class Broadcast {
     constructor (options) {
         this.options = options
     }
 
     install () {
-        const selt = this
+        const self = this
         Vue.prototype.$broadcast = {
             postMessage (broadcastChannelName, message = '') {
-                if (!self.options.hasOwnProperty(broadcastChannelName)) {
+                if (!self.options.includes(broadcastChannelName)) {
                     throw new Error('broadcastChannel is not exist!')
                 } else {
                     let broadcastChannel = new BroadcastChannel(broadcastChannelName)
@@ -20,7 +19,7 @@ export default class Broadcast {
             },
 
             onMessage (broadcastChannelName, fn) {
-                if (!selt.options.hasOwnProperty(broadcastChannelName)) {
+                if (!self.options.includes(broadcastChannelName)) {
                     throw new Error('broadcastChannel is not exist!')
                 } else {
                     let broadcastChannel = new BroadcastChannel(broadcastChannelName)

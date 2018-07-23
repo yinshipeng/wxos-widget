@@ -10,10 +10,11 @@ import './src/storage'
 
 let instance = null
 export default class Widget {
-    constructor ({routes, apis}) {
+    constructor ({routes, apis, broadcasts}) {
         if (!instance) {
             Vue.use(new Router(routes))
             Vue.use(new Request(apis))
+            Vue.use(new Broadcast(broadcasts))
             instance = this
         }
         return instance
