@@ -37,7 +37,7 @@ export default class Request {
         const self = this
         Vue.prototype.$request = (apiName, params, resolve, reject, progressCallback) => {
             const api = self.getCurrentAPI(apiName)
-            let url = self.baseUrl + api.url, body = ''
+            let url = self.baseUrl + api.url, body = {}
             if (isNotEmpty(params)) {
                 if (api.method.toLowerCase() === 'get') {
                     url += objParamsToString(params)
